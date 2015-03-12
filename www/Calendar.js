@@ -202,6 +202,26 @@ Calendar.prototype.listEventsInRange = function (startDate, endDate, successCall
   }])
 };
 
+Calendar.prototype.findEventInNamedCalendar = function (title, location, notes, startDate, endDate, calendarName, successCallback, errorCallback) {
+  cordova.exec(successCallback, errorCallback, "Calendar", "findEventInNamedCalendar", [{
+    "title": title,
+    "location": location,
+    "notes": notes,
+    "startTime": startDate instanceof Date ? startDate.getTime() : null,
+    "endTime": endDate instanceof Date ? endDate.getTime() : null,
+    "calendarName": calendarName
+  }])
+};
+
+Calendar.prototype.findEventsInRangeInNamedCalendar = function (calendarName, startDate, endDate, successCallback, errorCallback) {
+  cordova.exec(successCallback, errorCallback, "Calendar", "findEventsInRangeInNamedCalendar", [{
+    "startTime": startDate instanceof Date ? startDate.getTime() : null,
+    "endTime": endDate instanceof Date ? endDate.getTime() : null,
+    "calendarName": calendarName
+  }])
+};
+
+
 Calendar.prototype.listCalendars = function (successCallback, errorCallback) {
   cordova.exec(successCallback, errorCallback, "Calendar", "listCalendars", []);
 };
